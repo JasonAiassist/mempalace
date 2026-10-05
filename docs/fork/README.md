@@ -57,8 +57,11 @@ that tag). 3.10.0 is a *restructure*: `cli.py`, `mcp_server.py`, `palace.py` and
 include `backends/milvus.py`, `backends/rust_exact.py`, `hlc.py`, `hub_client.py`,
 `replica.py`, `logsync.py`, `integrations/hermes/`.
 
-Port triage of our 23 files against 3.10.0: **7 READY / 12 MANUAL / 4 PORT** — details in
-`fork-vs-3.10.0-status.txt`.
+Port triage of our 23 files against 3.10.0: the earlier report's "7 READY / 12 MANUAL / 4 PORT"
+triage counts exact-line matches and is **superseded** — a function-by-function comparison (symbols,
+bodies, tool-name set) shows our customisations are **already contained in upstream 3.10.0**.
+See **`MERGE-PLAN-3.10.0.md`** for the verified parity matrix, the residual analysis and the upgrade
+procedure. `fork-vs-3.10.0-status.txt` is retained as the original (superseded) report.
 
 ## ⚠️ Do not
 
