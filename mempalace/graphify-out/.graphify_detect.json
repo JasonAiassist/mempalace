@@ -1,0 +1,1 @@
+{"files": {}, "total_files": 0, "total_words": 0, "needs_graph": false, "warning": "Corpus is ~0 words - fits in a single context window. You may not need a graph.", "skipped_sensitive": [], "unclassified": [], "graphifyignore_patterns": 121, "scan_root": "/home/kraythorne/custom-hermes-agent/venv/lib/python3.11/site-packages/mempalace"}

@@ -1,0 +1,48 @@
+memPalace — local fork vs published 3.10.0
+fork install: 2026-07-31, direct_url=file:///tmp/mempalace-fork
+
+published 3.5.0 : 89 files | installed fork: 95 | published 3.10.0: 150
+fork-modified vs 3.5.0      : 23 files
+local-only (not in 3.5.0)   : ['mempalace/entities.py', 'mempalace/graphify-out/.graphify_ast.json', 'mempalace/graphify-out/.graphify_detect.json', 'mempalace/graphify-out/.graphify_extract.json', 'mempalace/graphify-out/.graphify_python', 'mempalace/graphify-out/.graphify_semantic.json']
+new in 3.10.0 (not in 3.5.0): ['mempalace/backends/_magic.py', 'mempalace/backends/milvus.py', 'mempalace/backends/rust_exact.py', 'mempalace/cli/__init__.py', 'mempalace/cli/__main__.py', 'mempalace/cli/_common.py', 'mempalace/cli/_hub.py', 'mempalace/cli/cmd_coord.py', 'mempalace/cli/cmd_init.py', 'mempalace/cli/cmd_mine.py', 'mempalace/cli/cmd_query.py', 'mempalace/cli/cmd_repair.py', 'mempalace/cli/cmd_serve.py', 'mempalace/cli/cmd_sync.py', 'mempalace/cli/cmd_update.py', 'mempalace/cli/parser.py', 'mempalace/cli_write_routing.py', 'mempalace/date_window.py', 'mempalace/encoding_repair.py', 'mempalace/entities.py', 'mempalace/hlc.py', 'mempalace/hub_client.py', 'mempalace/instructions/shared_brain_rules.md', 'mempalace/integrations/__init__.py', 'mempalace/integrations/hermes/__init__.py', 'mempalace/logstream.py', 'mempalace/logsync.py', 'mempalace/mcp_light_server.py', 'mempalace/mcp_proxy.py', 'mempalace/mcp_server/__init__.py', 'mempalace/mcp_server/__main__.py', 'mempalace/mcp_server/_guards.py', 'mempalace/mcp_server/_logging.py', 'mempalace/mcp_server/_session.py', 'mempalace/mcp_server/http.py', 'mempalace/mcp_server/protocol.py', 'mempalace/mcp_server/runtime.py', 'mempalace/mcp_server/schemas.py', 'mempalace/mcp_server/tools_coord.py', 'mempalace/mcp_server/tools_diary.py', 'mempalace/mcp_server/tools_kg.py', 'mempalace/mcp_server/tools_read.py', 'mempalace/mcp_server/tools_write.py', 'mempalace/palace/__init__.py', 'mempalace/palace/backend.py', 'mempalace/palace/closets.py', 'mempalace/palace/collection.py', 'mempalace/palace/mine_lock.py', 'mempalace/palace/mined.py', 'mempalace/palace/palace_lock.py', 'mempalace/query_parser.py', 'mempalace/replica.py', 'mempalace/searcher/__init__.py', 'mempalace/searcher/candidates.py', 'mempalace/searcher/cli_search.py', 'mempalace/searcher/filters.py', 'mempalace/searcher/query.py', 'mempalace/searcher/ranking.py', 'mempalace/searcher/render.py', 'mempalace/searcher/sqlite_bm25.py', 'mempalace/server_registry.py', 'mempalace/tasks.py', 'mempalace/transport.py', 'mempalace/update_awareness.py', 'mempalace/write_routing.py']
+removed in 3.10.0           : ['mempalace/cli.py', 'mempalace/mcp_server.py', 'mempalace/palace.py', 'mempalace/searcher.py']
+
+================================================================================================
+PER-FILE PATCH CLASSIFICATION
+================================================================================================
+  file                                           in310    3way-merge our added lines already in 3.10.0
+  --------------------------------------------------------------------------------------------
+  mempalace/backends/base.py                     yes      1 conflict 0/9
+  mempalace/backends/chroma.py                   yes      3 conflict 0/93
+  mempalace/backends/embedding_wrapper.py        yes      1 conflict 0/24
+  mempalace/backends/pgvector.py                 yes      1 conflict 0/45
+  mempalace/backends/qdrant.py                   yes      1 conflict 0/62
+  mempalace/backends/sqlite_exact.py             yes      1 conflict 0/17
+  mempalace/cli.py                               NO       MISSING    0/226
+  mempalace/config.py                            yes      1 conflict 0/17
+  mempalace/convo_miner.py                       yes      15 conflict 0/217
+  mempalace/daemon.py                            yes      CLEAN      0/16
+  mempalace/entity_detector.py                   yes      CLEAN      0/2
+  mempalace/hooks_cli.py                         yes      CLEAN      0/35
+  mempalace/knowledge_graph.py                   yes      CLEAN      0/129
+  mempalace/layers.py                            yes      CLEAN      0/3
+  mempalace/llm_client.py                        yes      CLEAN      0/1
+  mempalace/mcp_server.py                        NO       MISSING    0/658
+  mempalace/migrate.py                           yes      1 conflict 0/1
+  mempalace/miner.py                             yes      6 conflict 0/59
+  mempalace/normalize.py                         yes      1 conflict 0/19
+  mempalace/palace.py                            NO       MISSING    0/100
+  mempalace/repair.py                            yes      3 conflict 0/162
+  mempalace/searcher.py                          NO       MISSING    0/15
+  mempalace/service.py                           yes      CLEAN      0/1
+
+================================================================================================
+VERDICT COUNTS
+================================================================================================
+  MANUAL     12
+  READY      7
+  PORT (file gone upstream?) 4
+
+Legend: READY = our patch re-applies cleanly on 3.10.0
+        MANUAL = needs hand-porting (upstream also changed the region)
+        PORT   = file absent from 3.10.0, check upstream renames/removals
