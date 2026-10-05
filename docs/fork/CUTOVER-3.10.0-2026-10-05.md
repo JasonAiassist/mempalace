@@ -18,6 +18,14 @@ still present, which is what makes the rollback a one-liner.
 Unchanged: `args: [-m, mempalace.mcp_server]`, `env.MEMPALACE_PALACE_PATH=/home/kraythorne/.hermes/palace`,
 `connect_timeout: 30`, `timeout: 60`.
 
+**No gateway restart was required** — contrary to MERGE-PLAN §6 Phase 4 step 1. The gateway reads
+`mcp_servers` at **spawn time**, not only at boot: a mempalace server (pid 72445) came up at
+`13:59:04` — the same second `config.yaml` was written — on the new venv
+(`/home/kraythorne/.local/share/uv/python/cpython-3.11.15…`), with `MEMPALACE_PALACE_PATH` set and an
+open fd on the live `chroma.sqlite3`. Sessions already running keep their existing server; every new
+session gets 3.10.0. (A restart inside the gateway process is refused by design: SIGTERM would
+propagate to the caller.)
+
 ## Artifacts
 
 | | |
@@ -53,7 +61,7 @@ snapshots. Rollback is exercised, not merely documented.
 ## Behavioural delta to watch
 
 - Upstream **removed both** sticky `_MCP_WRITER_LOCK_FAILED` short-circuits (superset). Re-verify the peer-writer path under real contention.
-- New: `EmbedderIdentityUnknownWarning` — the palace has no recorded embedder identity; both fork and 3.10.0 resolve to `minilm`, so this is new *noise*, not a behaviour change. Canonical fix (post-cutover, optional): `mempalace palace set-embedder --model minilm`.
+- New: `EmbedderIdentityUnknownWarning` — the palace had no recorded embedder identity; both fork and 3.10.0 resolve to `minilm`, so this was new *noise*, not a behaviour change. **Closed 2026-10-05:** `mempalace --palace ~/.hermes/palace palace set-embedder --model minilm` → `✓ recorded embedder identity: minilm (dim=384)`. That also confirms the stored vectors are all-MiniLM-L6-v2. The record stops a future silent model swap from going unnoticed.
 
 ## Rollback
 
